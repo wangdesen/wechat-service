@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<!-- 配置mybatis缓存，延迟加载等 -->
+	<settings>
+		<!-- 全局映射，启动缓存 -->
+		<setting name="cacheEnabled" value="false"/>
+		<!-- 查询时，关闭关联查询，提高性能 -->
+		<setting name="lazyLoadingEnabled" value="false"/>
+		<!-- 配置log4j日志，打印sql，参数和结构 -->
+		<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	
+	<typeAliases>
+	
+		<!-- 配置类型别名 -->
+		<!-- <typeAlias alias="ExamAppoints" type="com.honliv.hims.entity.ExamAppoints"/> -->
+	  	
+	</typeAliases>
+	
+</configuration>

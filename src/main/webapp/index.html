@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta id="viewport" name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no;" />
+<meta content="yes" name="apple-mobile-web-app-capable" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+
+<title>健康体检微信预约</title>
+
+</head>
+<body>
+	<form name="form1" id="form1">
+		<header>
+			<div class="titleLine">健康体检微信预约</div>
+		</header>
+		
+		<section class="listCss">
+			<input type="button" name="btn_apt" value="体检预约" id="btn_apt" class="btnInput"/> 
+			<input type="button" name="btn_bind" value="绑定体检号" id="btn_bind" class="btnInput"/> 
+			<input type="button" name="btn_pet" value="体检结果" id="btn_pet" class="btnInput"/> 
+			<input type="button" name="btn_myhealth" value="健康助手" id="btn_myhealth" class="btnInput"/>
+		</section>
+		
+		<footer class="Ent_footer">
+			<div class="Ent_footer_nav">
+				<p> Powered by 河南宏力医院</p>
+			</div>
+		</footer>
+	</form>
+
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script type="text/javascript">	
+		$(initstp1);
+
+		//初始化列表&绑定按钮事件
+		function initstp1(){
+			//var url = encodeURIComponent("http://www.honliv.com/");
+			getCartList();
+		}
+
+		/**
+		 * 获取绑定体检卡列表
+		 * */
+		function getCartList(){
+			//alert("进入"+url);
+			$.ajax({
+				type: "GET",
+				async: false,
+				url: "api/sign/config",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				timeout: 3000,
+				success: function (result) {
+					if (result.retCode == "0000") {
+						for (var i = 0; i < result.data.length; i++) {
+							alert(result.data[i].appid + "------" + result.data[i].signature);
+						}
+					}
+				}
+			});
+		}
+	</script>
+</body>
+</html>
