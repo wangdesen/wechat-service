@@ -36,8 +36,8 @@
 
 		//初始化列表&绑定按钮事件
 		function initstp1(){
-			//var url = encodeURIComponent("http://www.honliv.com/");
-			getCartList();
+			//getCartList();
+			testPost();
 		}
 
 		/**
@@ -58,6 +58,25 @@
 							alert(result.data[i].appid + "------" + result.data[i].signature);
 						}
 					}
+				}
+			});
+		}
+		
+		function testPost(){
+			var idList = new Array();  
+			idList.push("1");
+			idList.push("2");
+			idList.push("3");
+			var isBatch = false;
+			//var data = JSON.stringify({"idList":idList,"isBatch":isBatch});
+			$.ajax({
+				type: "POST",
+				url: "api/sign/test-post",
+				contentType: "application/json; charset=utf-8",
+				data: JSON.stringify({idList:idList}), 
+				dataType: "json",
+				success: function (result) {
+					console.log(result);
 				}
 			});
 		}

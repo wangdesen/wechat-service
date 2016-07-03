@@ -1,6 +1,7 @@
 package com.honliv.wechat.controller;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -8,8 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.honliv.wechat.base.BaseResult;
@@ -84,6 +88,16 @@ public class SignController implements Serializable {
 		}
 		return BaseResult.fail(ErrorCode.resultNullRetCode, "获取AccessToken失败！");
 		
+	}
+	
+	@RequestMapping(value="/test-post", method = RequestMethod.POST)
+	@ResponseBody
+	//@RequestBody List<String> idList
+	//@RequestParam("idList[]") String[] idList
+	public BaseResult testPostArrayJson(@RequestBody ModelMap modelMap){
+		
+		List<String> lists = (List<String>) modelMap.get("idList");
+		return BaseResult.success(lists);
 	}
 	
 }

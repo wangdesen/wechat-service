@@ -29,6 +29,8 @@
     <!-- 自动扫描 -->
 	<bean id="springBeanFactoryUtils" class="com.honliv.wechat.util.SpringBeanFactoryUtils"/>
 	
+	<!-- test area -->
+	
 	<!-- 启用AspectJ自动代理 -->
     <aop:aspectj-autoproxy/>
 	
