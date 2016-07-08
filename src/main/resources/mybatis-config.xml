@@ -17,7 +17,7 @@
 	<typeAliases>
 	
 		<!-- 配置类型别名 -->
-		<!-- <typeAlias alias="ExamAppoints" type="com.honliv.hims.entity.ExamAppoints"/> -->
+		<typeAlias alias="ScheduleJob" type="com.honliv.wechat.bean.ScheduleJob"/>
 	  	
 	</typeAliases>
 	

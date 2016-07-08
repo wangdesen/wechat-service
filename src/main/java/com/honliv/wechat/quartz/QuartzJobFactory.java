@@ -4,6 +4,8 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.honliv.wechat.bean.ScheduleJob;
+
 /**
  * @author wangdesen
  * 

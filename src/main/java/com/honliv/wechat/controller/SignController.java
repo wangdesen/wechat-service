@@ -13,14 +13,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.honliv.wechat.base.BaseResult;
 import com.honliv.wechat.bean.AccessToken;
+import com.honliv.wechat.bean.ScheduleJobVo;
 import com.honliv.wechat.bean.WechatConfig;
 import com.honliv.wechat.constants.ErrorCode;
 import com.honliv.wechat.service.AccessTokenService;
+import com.honliv.wechat.service.ScheduleJobService;
 import com.honliv.wechat.thread.JSTicketThread;
 import com.honliv.wechat.util.SignUtil;
 
@@ -35,16 +36,27 @@ public class SignController implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Autowired
 	private HttpServletRequest request;
 	
-	@Resource
+	public HttpServletRequest getRequest() {
+        return request;
+    }
+ 
+    @Resource
+    public void setRequest(HttpServletRequest request) {
+        this.request = request;
+    }
+	
+	@Autowired
 	private AccessTokenService accessTokenService;
+	
+	@Autowired
+	private ScheduleJobService scheduleJobService;
 	
 	/**
 	 * 获取微信JS-SDK配置信息
 	 * */
-	@RequestMapping(value="/config", method = RequestMethod.GET)
+	@RequestMapping(value="/config.do", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResult getWechatConfig(){
 		
@@ -78,7 +90,7 @@ public class SignController implements Serializable {
 	}
 	
 	
-	@RequestMapping(value="/access-token", method = RequestMethod.GET)
+	@RequestMapping(value="/access-token.do", method = RequestMethod.GET)
 	@ResponseBody
 	public BaseResult getAccessToken(){
 		
@@ -90,7 +102,7 @@ public class SignController implements Serializable {
 		
 	}
 	
-	@RequestMapping(value="/test-post", method = RequestMethod.POST)
+	@RequestMapping(value="/test-post.do", method = RequestMethod.POST)
 	@ResponseBody
 	//@RequestBody List<String> idList
 	//@RequestParam("idList[]") String[] idList
@@ -99,5 +111,23 @@ public class SignController implements Serializable {
 		List<String> lists = (List<String>) modelMap.get("idList");
 		return BaseResult.success(lists);
 	}
+	
+	/**
+     * 任务列表页
+     *
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value = "/list-schedule-job.do", method = RequestMethod.GET)
+    public String listScheduleJob(ScheduleJobVo scheduleJobVo, ModelMap modelMap) {
+
+        List<ScheduleJobVo> scheduleJobVoList = scheduleJobService.queryList(scheduleJobVo);
+        modelMap.put("scheduleJobVoList", scheduleJobVoList);
+
+        List<ScheduleJobVo> executingJobList = scheduleJobService.queryExecutingJobList();
+        modelMap.put("executingJobList", executingJobList);
+
+        return "list-schedule-job";
+    }
 	
 }

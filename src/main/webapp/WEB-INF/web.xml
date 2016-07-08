@@ -1,107 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>wechat-service</display-name>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   
-  <filter>
-    <filter-name>encodingFilter</filter-name>
-    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-    <async-supported>true</async-supported>
-    <init-param>
-      <param-name>encoding</param-name>
-      <param-value>UTF-8</param-value>
-    </init-param>
-    <init-param>
-      <param-name>forceEncoding</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>encodingFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  	<display-name>wechat-service</display-name>
+  	
+  	<!-- 配置上下文 -->
+  	<context-param>
+	    <param-name>contextConfigLocation</param-name>
+	    <!-- <param-value>classpath:applicationContext.xml</param-value> -->
+	    <param-value>classpath:root-config.xml</param-value>
+  	</context-param>
+  	
+  	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  	</listener>
+  	
+  	<!-- 编码过滤器 -->
+  	<filter>
+	    <filter-name>encodingFilter</filter-name>
+	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+	    <async-supported>true</async-supported>
+	    <init-param>
+      		<param-name>encoding</param-name>
+      		<param-value>UTF-8</param-value>
+    	</init-param>
+    	<init-param>
+      		<param-name>forceEncoding</param-name>
+      		<param-value>true</param-value>
+    	</init-param>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>encodingFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+  	</filter-mapping>
+  	
+  	<!-- CORS支持 -->
+  	<filter>
+    	<filter-name>corsFilter</filter-name>
+    	<filter-class>com.honliv.wechat.filter.WechatServiceCORSFilter</filter-class>
+  	</filter>
+  	<filter-mapping>
+    	<filter-name>corsFilter</filter-name>
+    	<url-pattern>/*</url-pattern>
+  	</filter-mapping>
   
-  <filter>
-    <filter-name>corsFilter</filter-name>
-    <filter-class>com.honliv.wechat.filter.WechatServiceCORSFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>corsFilter</filter-name>
-    <url-pattern>/api/*</url-pattern>
-  </filter-mapping>
+  	<!-- 定时任务相关监听器 -->
+  	<listener>
+    	<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+  	</listener>
   
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <listener>
-    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
-  </listener>
+  	<servlet>
+    	<servlet-name>initServlet</servlet-name>
+    	<servlet-class>com.honliv.wechat.servlet.InitServlet</servlet-class>
+    
+	    <!-- 公众号：河南宏力医院；主体：河南宏力医院 -->
+	    <init-param>
+	      <param-name>hnhlyy_appid</param-name>
+	      <param-value>wxeb3d19202ad50a33</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>hnhlyy_appsecret</param-name>
+	      <param-value>3b4a3a9fda9290d93b3e08a2fa2640e4</param-value>
+	    </init-param>
+    
+	    <!-- 公众号：宏力医院；主体：河南宏力医院公司 -->
+	    <init-param>
+	      <param-name>hlyy_appid</param-name>
+	      <param-value>wx4eb675f5823c3c44</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>hlyy_appsecret</param-name>
+	      <param-value>564edb89b8c8de30a0b0011d9ffc80e8</param-value>
+	    </init-param>
+    
+	    <!-- 公众号：宏力集团；主体：河南宏力集团 -->
+	    <init-param>
+	      <param-name>hljt_appid</param-name>
+	      <param-value>wx66fe0d62a775a308</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>hljt_appsecret</param-name>
+	      <param-value>8b89c2620967a41d0cb3ac88e25727ef</param-value>
+	    </init-param>
+    
+	    <!-- 公众号：宏力A生活；主体：宏力A生活公司 -->
+	    <init-param>
+	      <param-name>alife_appid</param-name>
+	      <param-value>wxcdcd8df5eb2758a1</param-value>
+	    </init-param>
+	    <init-param>
+	      <param-name>alife_appsecret</param-name>
+	      <param-value>7b2e50a184b24f0238a8929e2cb1552f</param-value>
+	    </init-param>
+    
+    	<!-- <load-on-startup>0</load-on-startup> -->
+  	</servlet>
   
-  <servlet>
-    <servlet-name>initServlet</servlet-name>
-    <servlet-class>
-    	com.honliv.wechat.servlet.InitServlet  
-    </servlet-class>
-    
-    <!-- 公众号：河南宏力医院；主体：河南宏力医院 -->
-    <init-param>
-      <param-name>hnhlyy_appid</param-name>
-      <param-value>wxeb3d19202ad50a33</param-value>
-    </init-param>
-    <init-param>
-      <param-name>hnhlyy_appsecret</param-name>
-      <param-value>3b4a3a9fda9290d93b3e08a2fa2640e4</param-value>
-    </init-param>
-    
-    <!-- 公众号：宏力医院；主体：河南宏力医院公司 -->
-    <init-param>
-      <param-name>hlyy_appid</param-name>
-      <param-value>wx4eb675f5823c3c44</param-value>
-    </init-param>
-    <init-param>
-      <param-name>hlyy_appsecret</param-name>
-      <param-value>564edb89b8c8de30a0b0011d9ffc80e8</param-value>
-    </init-param>
-    
-    <!-- 公众号：宏力集团；主体：河南宏力集团 -->
-    <init-param>
-      <param-name>hljt_appid</param-name>
-      <param-value>wx66fe0d62a775a308</param-value>
-    </init-param>
-    <init-param>
-      <param-name>hljt_appsecret</param-name>
-      <param-value>8b89c2620967a41d0cb3ac88e25727ef</param-value>
-    </init-param>
-    
-    <!-- 公众号：宏力A生活；主体：宏力A生活公司 -->
-    <init-param>
-      <param-name>alife_appid</param-name>
-      <param-value>wxcdcd8df5eb2758a1</param-value>
-    </init-param>
-    <init-param>
-      <param-name>alife_appsecret</param-name>
-      <param-value>7b2e50a184b24f0238a8929e2cb1552f</param-value>
-    </init-param>
-    
-    <!-- <load-on-startup>0</load-on-startup> -->
-  </servlet>
-  
-  <servlet>
-    <servlet-name>SpringMVC</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-mvc.xml</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-    <async-supported>true</async-supported>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>SpringMVC</servlet-name>
-    <url-pattern>/api/*</url-pattern>
-  </servlet-mapping>
+  	<servlet>
+	    <servlet-name>SpringMVC</servlet-name>
+	    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	    <init-param>
+      		<param-name>contextConfigLocation</param-name>
+      		<!-- classpath:spring-mvc.xml -->
+      		<param-value></param-value>
+    	</init-param>
+    	<load-on-startup>1</load-on-startup>
+    	<async-supported>true</async-supported>
+  	</servlet>
+  	<servlet-mapping>
+    	<servlet-name>SpringMVC</servlet-name>
+    	<url-pattern>*.do</url-pattern>
+  	</servlet-mapping>
   
 </web-app>

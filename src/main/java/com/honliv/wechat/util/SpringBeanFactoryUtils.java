@@ -3,12 +3,14 @@ package com.honliv.wechat.util;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.stereotype.Component;
 
 /**
  * 为线程提供SpringBean的注入方法
  * 
  * @author wangdesen
  * */
+@Component
 public class SpringBeanFactoryUtils implements BeanFactoryAware {
 
 	private static BeanFactory beanFactory = null;
