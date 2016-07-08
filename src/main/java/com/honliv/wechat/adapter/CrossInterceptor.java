@@ -5,6 +5,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+/**
+ * 跨域拦截器
+ * */
 public class CrossInterceptor extends HandlerInterceptorAdapter {
 
 	@Override

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.honliv.wechat.dao.ScheduleJobVoMapper">
+
+  <resultMap id="BaseResultMap" type="com.honliv.wechat.bean.ScheduleJobVo">
+    <id column="SCHEDULE_JOB_ID" jdbcType="BIGINT" property="scheduleJobId" />
+    <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+    <result column="ALIAS_NAME" jdbcType="VARCHAR" property="aliasName" />
+    <result column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup" />
+    <result column="JOB_TRIGGER" jdbcType="VARCHAR" property="jobTrigger" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CRON_EXPRESSION" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="IS_SYNC" jdbcType="BIT" property="isSync" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="GMT_MODIFY" jdbcType="TIMESTAMP" property="gmtModify" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    SCHEDULE_JOB_ID, JOB_NAME, ALIAS_NAME, JOB_GROUP, JOB_TRIGGER, STATUS, CRON_EXPRESSION, 
+    IS_SYNC, DESCRIPTION, GMT_CREATE, GMT_MODIFY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from App_Schedule_Job_Vo
+    where SCHEDULE_JOB_ID = #{scheduleJobId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from App_Schedule_Job_Vo
+    where SCHEDULE_JOB_ID = #{scheduleJobId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.honliv.wechat.bean.ScheduleJobVo">
+    insert into App_Schedule_Job_Vo (SCHEDULE_JOB_ID, JOB_NAME, ALIAS_NAME, 
+      JOB_GROUP, JOB_TRIGGER, STATUS, 
+      CRON_EXPRESSION, IS_SYNC, DESCRIPTION, 
+      GMT_CREATE, GMT_MODIFY)
+    values (#{scheduleJobId,jdbcType=BIGINT}, #{jobName,jdbcType=VARCHAR}, #{aliasName,jdbcType=VARCHAR}, 
+      #{jobGroup,jdbcType=VARCHAR}, #{jobTrigger,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{cronExpression,jdbcType=VARCHAR}, #{isSync,jdbcType=BIT}, #{description,jdbcType=VARCHAR}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModify,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.honliv.wechat.bean.ScheduleJobVo">
+    insert into App_Schedule_Job_Vo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="scheduleJobId != null">
+        SCHEDULE_JOB_ID,
+      </if>
+      <if test="jobName != null">
+        JOB_NAME,
+      </if>
+      <if test="aliasName != null">
+        ALIAS_NAME,
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP,
+      </if>
+      <if test="jobTrigger != null">
+        JOB_TRIGGER,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="cronExpression != null">
+        CRON_EXPRESSION,
+      </if>
+      <if test="isSync != null">
+        IS_SYNC,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="gmtCreate != null">
+        GMT_CREATE,
+      </if>
+      <if test="gmtModify != null">
+        GMT_MODIFY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="scheduleJobId != null">
+        #{scheduleJobId,jdbcType=BIGINT},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasName != null">
+        #{aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="jobTrigger != null">
+        #{jobTrigger,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="isSync != null">
+        #{isSync,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.honliv.wechat.bean.ScheduleJobVo">
+    update App_Schedule_Job_Vo
+    <set>
+      <if test="jobName != null">
+        JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="aliasName != null">
+        ALIAS_NAME = #{aliasName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobGroup != null">
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="jobTrigger != null">
+        JOB_TRIGGER = #{jobTrigger,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="isSync != null">
+        IS_SYNC = #{isSync,jdbcType=BIT},
+      </if>
+      <if test="description != null">
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModify != null">
+        GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SCHEDULE_JOB_ID = #{scheduleJobId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.honliv.wechat.bean.ScheduleJobVo">
+    update App_Schedule_Job_Vo
+    set JOB_NAME = #{jobName,jdbcType=VARCHAR},
+      ALIAS_NAME = #{aliasName,jdbcType=VARCHAR},
+      JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+      JOB_TRIGGER = #{jobTrigger,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+      IS_SYNC = #{isSync,jdbcType=BIT},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      GMT_CREATE = #{gmtCreate,jdbcType=TIMESTAMP},
+      GMT_MODIFY = #{gmtModify,jdbcType=TIMESTAMP}
+    where SCHEDULE_JOB_ID = #{scheduleJobId,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 查询所有 -->
+  <select id="queryList" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from APP_SCHEDULE_JOB_VO
+  </select>
+</mapper>

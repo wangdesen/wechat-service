@@ -1,11 +1,8 @@
 package com.honliv.wechat.service.impl;
 
-import javax.annotation.Resource;
-
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Service;
-
 
 import com.honliv.wechat.bean.AccessToken;
 import com.honliv.wechat.dao.AccessTokenMapper;
@@ -16,13 +13,13 @@ import com.honliv.wechat.service.AccessTokenService;
  * 
  * @author wangdesen
  * */
-@Service("accessTokenService")
+//@Service("accessTokenService")
 public class AccessTokenServiceImpl implements AccessTokenService {
 
 	private static Logger logger = Logger.getLogger(AccessTokenServiceImpl.class);
 	
 	//持久化AccessToken
-	@Resource
+	@Autowired
 	private AccessTokenMapper accessTokenDao;
 	
 	
